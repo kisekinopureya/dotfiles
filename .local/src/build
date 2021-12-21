@@ -1,0 +1,98 @@
+#!/bin/sh
+config=config
+helper=doashelper
+[ "$2" = "--nohelper" ] && helper="doas"
+if [ "$(whereis doas)" = "" ]; then
+	echo "Doas is missing \n if using sudo, do \n \`alias doas=sudo\`"
+	exit
+fi
+
+dwm(){
+name="dwm"
+version="6.2"
+src="dl.suckless.org/$name/$name-$version.tar.gz"
+git="false"
+}
+
+dmenu(){
+name="dmenu"
+version="5.0"
+src="dl.suckless.org/tools/$name-$version.tar.gz"
+git="false"
+}
+
+dwmblocks(){
+name="dwmblocks"
+version="master"
+src="https://github.com/torrinfail/$name/archive/refs/heads/$version.tar.gz"
+config=blocks
+git="true"
+}
+
+st(){
+name="st"
+version="0.8.4"
+src="dl.suckless.org/$name/$name-$version.tar.gz"
+git="false"
+}
+
+slock(){
+name="slock"
+version="1.4"
+src="dl.suckless.org/tools/$name-$version.tar.gz"
+git="false"
+}
+
+pinentrydmenu(){
+name="pinentry-dmenu"
+version="master"
+src="https://github.com/ritze/$name/archive/refs/heads/$version.tar.gz"
+git="true"
+}
+
+patcher(){
+for i in ~/.local/src/patches/"$name"/*.diff
+do
+	patch -p1 -i "$i"
+done
+}
+
+configurer(){
+cp ~/.local/src/configs/$name/$config.h /tmp/$name-$version
+}
+
+build(){
+$1
+cd /tmp || exit
+curl -LO $src
+if [ "$git" = "true" ]; then
+	tar xzf $version.tar.gz
+else
+	tar xzf $name-$version.tar.gz
+fi
+cd $name-$version || exit
+patcher
+configurer
+$helper make -s install
+rm -rf /tmp/$name-$version /tmp/$name-$version.tar.gz /tmp/$version.tar.gz
+}
+
+help(){
+echo "Usage:\n ./build \"program name or all\" \n --nohelper: won't call doashelper" 
+exit
+}
+
+[ "$1" = "-h" ] && help 
+
+if [ "$1" != "" ] && [ "$1" != "all" ]; then
+	build "$1"
+elif [ "$1" = all ]; then
+	build dwm
+	build st
+	build dmenu
+	build slock
+	build pinentrydmenu
+	build dwmblocks
+else 
+	help
+fi

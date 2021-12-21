@@ -1,0 +1,26 @@
+#!/bin/sh
+
+[ -z "$delay" ] && delay=0
+x=$(print "Fullscreen\nArea\nSet Delay" | dmenu)
+cmd="sxiv \$f && mkdir -p ~/Pictures/Screenshots; mv \$f ~/Pictures/Screenshots"
+
+while :
+do
+	case $x in
+		'Set Delay')
+			delay="$(dmenu -p 'Set Delay (In Seconds)')" screenshot
+			break
+			;;
+		Fullscreen)
+			scrot -e "$cmd" -d "$delay"
+			break
+			;;
+		Area)
+			scrot -s -e "$cmd" -d "$delay"
+			break
+			;;
+		*)
+			break
+			;;
+	esac
+done

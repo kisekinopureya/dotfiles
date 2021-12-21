@@ -1,0 +1,23 @@
+#!/bin/sh
+
+getlevel() 
+{
+	sndioctl -n "$1".level | awk '{vol=$1;print int(vol * 100)}'
+}
+
+getmute()
+{
+	sndioctl -n "$1".mute
+}
+
+[ "$(getmute input)" = 1 ] && miclevel="[M]" || miclevel="%$(getlevel input)"
+
+if [ "$(uname)" = "OpenBSD" ] && [ "$(sysctl -n kern.audio.record)" = 1 ]; then
+       miclevel="[D]"
+fi
+
+[ "$(getmute output)" = 1 ] && outputlevel="[M]" || outputlevel="%$(getlevel output)"
+
+[ "$(uname)" = "OpenBSD" ] && [ "$(sysctl -n kern.video.record)" = 1 ] && cam="[C]"
+
+echo "$cam$miclevel $outputlevel"

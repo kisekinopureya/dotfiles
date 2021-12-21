@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -h "$HOME"/.local/share/wallpaper ]; then
+        xwallpaper --zoom "$(readlink "$HOME"/.local/share/wallpaper)"
+else
+        openbsd-wallpaper
+fi

@@ -1,0 +1,35 @@
+#!/bin/sh
+x=$(printf "Power Off\nReboot\nLog Out\nRestart dwm\nLock Screen" | dmenu)
+
+while :
+do
+	case $x in
+		"Restart dwm")
+			pkill dwm
+			break
+			;;
+		"Power Off")
+			if [ "$(uname)" = "OpenBSD" ]; then
+				doashelper shutdown -p now
+                        else
+				doashelper poweroff
+                        fi
+			break
+			;;
+		"Reboot")
+			doashelper reboot
+			break
+			;;
+		"Lock Screen")
+			slock
+			break
+			;;
+		"Log Out")
+			pkill -KILL -u "$USER"
+			break
+			;;
+		*)
+			break
+			;;
+		esac
+done

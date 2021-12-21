@@ -1,0 +1,45 @@
+#!/bin/sh
+ytcmd="ytfzf -D"
+[ -n "$(pgrep mpv)" ] && [ "$(printf "Yes\nNo" | dmenu -p "Stop Current Instance")" = "Yes" ] && pkill mpv
+x=$(printf "Search\nHistory\nSubscriptions" | dmenu)
+
+selector() {
+select=$(printf "Video\nAudio only" | dmenu)
+	case $select in
+		Video)
+			ytcmd="$ytcmd -N"
+			return
+			;;
+		"Audio only")
+			ytcmd="$ytcmd -Nm"
+			return
+			;;
+		*)
+			return
+			;;
+	esac
+}
+
+while :
+do
+	case $x in
+		Search)
+			selector 
+			$ytcmd -q
+			break
+			;;
+		History)
+			selector 
+			$ytcmd -H
+			break
+			;;
+		Subscriptions)
+			selector 
+			$ytcmd -S
+			break
+			;;
+		*)
+			break
+			;;
+	esac
+done

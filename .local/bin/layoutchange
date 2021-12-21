@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# add your layouts here
+set -A enabledlayouts us tr
+
+current="$(setxkbmap -print -verbose 8 | awk /layout/'{print $2}')"
+
+i=0
+while :
+do
+	if [ "$current" = "${enabledlayouts[$i]}" ]; then
+		k="$((i + 1))"
+		if [ "${enabledlayouts[$k]}" != "" ]; then
+			new="${enabledlayouts[$k]}"
+			break
+		else 
+			new="${enabledlayouts[0]}"
+			break
+		fi
+	fi
+	i="$((i + 1))"
+done
+[ "$new" != "" ] && setxkbmap "$new"

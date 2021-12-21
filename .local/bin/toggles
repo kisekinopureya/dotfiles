@@ -1,0 +1,33 @@
+#!/bin/sh
+if [ "$(uname)" != "OpenBSD" ]; then
+	error="Toggles are only available on OpenBSD"
+	notify-send "$error" || echo "$error"
+	exit
+fi
+choice=$(printf "Camera\nMicrophone" | dmenu)
+
+toggle() {
+	if [ "$(sysctl -n kern."$1".record)" = 1 ]; then
+		doashelper sysctl kern."$1".record=0
+	elif [ "$(sysctl -n kern."$1".record)" = 0 ]; then
+		doashelper sysctl kern."$1".record=1
+	fi
+}
+
+while :
+do
+	case $choice in
+		Camera)
+			toggle video
+			break
+			;;
+		Microphone)
+			toggle audio
+			break
+			;;
+		*)
+			break
+			;;
+	esac
+done
+pkill -SIGUSR1 dwmblocks		

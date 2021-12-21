@@ -1,0 +1,19 @@
+diff --git a/config.mk b/config.mk
+index 4c71211..cd8cc25 100644
+--- a/config.mk
++++ b/config.mk
+@@ -18,11 +18,11 @@ XINERAMAFLAGS = -DXINERAMA
+ FREETYPELIBS = -lfontconfig -lXft
+ FREETYPEINC = /usr/include/freetype2
+ # OpenBSD (uncomment)
+-#FREETYPEINC = ${X11INC}/freetype2
++FREETYPEINC = ${X11INC}/freetype2
+ 
+ # Includes and libs
+-INCS = -I${X11INC} -I${FREETYPEINC}
+-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS}
++INCS = -I${X11INC} -I/usr/local/include -I${FREETYPEINC}
++LIBS = -L${X11LIB} -L/usr/local/lib -lX11 ${XINERAMALIBS} ${FREETYPELIBS}
+ 
+ # Flags
+ CPPFLAGS = -D_DEFAULT_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS} -DPACKAGE_VERSION=\"${VERSION}\" -DPACKAGE_BUGREPORT=\"${BUGREPORT}\"

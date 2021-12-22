@@ -31,6 +31,8 @@
 - To install my suckless program builds, run `~/.local/src/build all`[^3]
 	- Patches and configs are in `~/.local/src/patches` `~/.local/src/configs`
 
+![Screenshot](.local/screenshot.png)
+
 ## TODO:
 - [ ] Add detail about scripts
 - [ ] Add manual for dwm shortcuts

@@ -2,11 +2,14 @@
 
 # no sb-battery for linux :(
 [ "$(uname)" != "OpenBSD" ] && exit
-
-batteryp=$(apm -l)
-if [ "$(apm -a)" = "1" ]; then
+charger="$(apm -a)"
+batteryp="$(apm -l)"
+batterys="$(apm -b)"
+if [ "$charger" = "1" ] && [ "$batterys" != "4" ]; then
 	battery="Charging ($batteryp)"
+elif [ "$batterys" = "4" ]; then
+	battery="No Battery"
 else
 	battery="%$batteryp"
 fi
-echo " $battery"
+echo "$battery"

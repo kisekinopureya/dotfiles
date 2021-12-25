@@ -12,7 +12,7 @@ getmute()
 
 [ "$(getmute input)" = 1 ] && miclevel="[M]" || miclevel="%$(getlevel input)"
 
-if [ "$(uname)" = "OpenBSD" ] && [ "$(sysctl -n kern.audio.record)" = 1 ]; then
+if [ "$(uname)" = "OpenBSD" ] && [ "$(sysctl -n kern.audio.record)" = 0 ]; then
        miclevel="[D]"
 fi
 

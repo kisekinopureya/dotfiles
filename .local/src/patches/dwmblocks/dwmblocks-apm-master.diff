@@ -1,0 +1,29 @@
+diff --git a/Makefile b/Makefile
+index 04302f8..07df946 100644
+--- a/Makefile
++++ b/Makefile
+@@ -15,5 +15,8 @@ clean:
+ install: output
+ 	mkdir -p $(DESTDIR)$(PREFIX)/bin
+ 	install -m 0755 dwmblocks $(DESTDIR)$(PREFIX)/bin/dwmblocks
++	mkdir -p /etc/apm
++	install -m 0755 powerup /etc/apm/powerup
++	install -m 0755 powerup /etc/apm/powerdown
+ uninstall:
+ 	rm -f $(DESTDIR)$(PREFIX)/bin/dwmblocks
+diff --git a/powerdown b/powerdown
+new file mode 100755
+index 0000000..fbcbf1a
+--- /dev/null
++++ b/powerdown
+@@ -0,0 +1,2 @@
++#!/bin/sh
++pkill -SIGUSR2 dwmblocks
+diff --git a/powerup b/powerup
+new file mode 100755
+index 0000000..fbcbf1a
+--- /dev/null
++++ b/powerup
+@@ -0,0 +1,2 @@
++#!/bin/sh
++pkill -SIGUSR2 dwmblocks

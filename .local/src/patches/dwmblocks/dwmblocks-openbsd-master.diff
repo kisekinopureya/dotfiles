@@ -1,15 +1,15 @@
---- Makefile.orig
-+++ Makefile
-@@ -1,9 +1,11 @@
- PREFIX ?= /usr/local
- CC ?= cc
-+X11INC = /usr/X11R6/include
-+X11LIB = /usr/X11R6/lib
- LDFLAGS = -lX11
+diff --git a/Makefile b/Makefile
+index 75109ac..fd81050 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,8 +5,8 @@ LDFLAGS := -lX11
  
- output: dwmblocks.c blocks.def.h blocks.h
--	${CC}  dwmblocks.c $(LDFLAGS) -o dwmblocks
-+	${CC} -I${X11INC} dwmblocks.c -L${X11LIB} $(LDFLAGS) -o dwmblocks
- blocks.h:
- 	cp blocks.def.h $@
+ # FreeBSD (uncomment)
+ #LDFLAGS += -L/usr/local/lib -I/usr/local/include
+-# # OpenBSD (uncomment)
+-#LDFLAGS += -L/usr/X11R6/lib -I/usr/X11R6/include
++# OpenBSD (uncomment)
++LDFLAGS += -L/usr/X11R6/lib -I/usr/X11R6/include
+ 
+ all: options dwmblocks
  

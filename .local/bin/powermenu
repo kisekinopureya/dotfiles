@@ -1,13 +1,9 @@
 #!/bin/sh
-x=$(printf "Power Off\nReboot\nLog Out\nRestart dwm\nLock Screen" | dmenu)
+x=$(printf "Power Off\nReboot\nLog Out\nLock Screen" | dmenu)
 
 while :
 do
 	case $x in
-		"Restart dwm")
-			pkill dwm
-			break
-			;;
 		"Power Off")
 			if [ "$(uname)" = "OpenBSD" ]; then
 				doashelper shutdown -p now

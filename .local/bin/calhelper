@@ -1,0 +1,6 @@
+#!/bin/sh
+
+today="$(date '+%d')"
+notif="$(cal | sed s/$today/"!$today"/g)"
+
+notify-send "$notif"

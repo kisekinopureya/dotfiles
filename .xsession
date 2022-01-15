@@ -1,8 +1,6 @@
 #!/bin/sh
 . ~/.profile
 setmonitor &
-export $(dbus-launch)
-xcompmgr -c &
 mpc rescan &
 mpd &
 xrdb .Xresources
@@ -11,7 +9,4 @@ redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=ge
 xautolock -time 10 -locker slock &
 syncthing &
 xbanish &
-while true :
-do
-	dwm
-done
+exec dwm

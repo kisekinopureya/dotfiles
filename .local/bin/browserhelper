@@ -1,0 +1,66 @@
+#!/bin/sh
+
+SEARCHIST="${SEARCHIST-0}"
+SEARCHISTFILE="${SEARCHISTFILE-$HOME/.cache/searchist}"
+URLHIST="${URLHIST-0}"
+URLHISTFILE="${URLHISTFILE-$HOME/.cache/urlhist}"
+BOOKMARKFILE="${BOOKMARKFILE-$HOME/.config/bookmarks}"
+
+x="$(printf "Search\nGoto URL\nBookmarks" | dmenu)"
+
+searchelper(){
+if [ "$SEARCHIST" = 1 ]; then
+	[ ! -f "$SEARCHISTFILE" ] && touch "$SEARCHISTFILE"
+	search="$(cat $SEARCHISTFILE | dmenu)"
+	echo "$search" >> "$SEARCHISTFILE"
+elif [ "$SEARCHIST" = 0 ]; then
+	search="$(:|dmenu)"
+fi
+
+[ -z "$search" ] && exit
+}
+
+urlhelper(){
+if [ "$URLHIST" = 1 ]; then
+	[ ! -f "$URLHISTFILE" ] && touch "$URLHISTFILE"
+	url="$(cat $URLHISTFILE | dmenu)"
+	echo "$url" >> "$URLHISTFILE"
+elif [ "$URLHIST" = 0 ]; then
+	url="$(:|dmenu)"	
+fi
+
+[ -z "$url" ] && exit
+}
+
+bookmarkhelper(){
+if [ -f "$BOOKMARKFILE" ]; then
+	bookmark="$(cat $BOOKMARKFILE | dmenu)"
+else
+	notify-send "You dont have bookmarks :("
+fi
+[ -z "$bookmark" ] && exit
+}
+
+while :
+do
+	case $x in
+		"Search")
+			searchelper
+			"$BROWSER" "$SEARCH_ENGINE"/?q="$search"
+			break
+			;;
+		"Goto URL")
+			urlhelper
+			"$BROWSER" "$url"
+			break
+			;;
+		"Bookmarks")
+			bookmarkhelper
+			"$BROWSER" "$bookmark"
+			break
+			;;
+		*)
+			break
+			;;
+		esac
+done

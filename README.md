@@ -10,11 +10,11 @@
 	- pinentry-dmenu (pinentry)
 	- slock (lockscreen)
 	- st (terminal emulator)
+	- surf (web browser)
 
 - Defaults:
 	- doas (root helper)
 	- dunst (notification daemon)
-	- links (web browser) duck.com (search engine)
 	- mpd/ncmpcpp (music)
 	- mpv (video player)
 	- neomutt (email client)
@@ -22,8 +22,10 @@
 	- openbsd-backgrounds (wallpapers)
 	- ranger (file manager)
 	- scrot (screen capture)
+	- search.disroot.org (search engine)
 	- sndio[^2] (audio backend)
 	- sxiv (image viewer)
+	- vis (text editor)
 	- xautolock (lock screen on inactivity) 
 	- xcompmgr (compositor)
 	- zathura (pdf viewer)
@@ -37,7 +39,7 @@
 - [ ] Add detail about scripts
 - [ ] Add manual for dwm shortcuts
 
-[^1]: Remove OpenBSD (also pledge for dwm) patches on linux
+[^1]: Remove OpenBSD patches and variable on linux
 [^2]: Check Hyperbola GNU/Linux's [sndio packages](https://www.hyperbola.info/packages/?q=sndio) to get sndio working on linux distributions
 [^3]: Add `--nohelper` if not using my dwm build
 

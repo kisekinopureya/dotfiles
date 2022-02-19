@@ -8,5 +8,5 @@ HISTFILE="$HOME/.cache/histfile"
 HISTSIZE=100
 #vis = vise on OpenBSD
 EDITOR=vise 
-MANPATH="/usr/share/man:/usr/local/share/man:/usr/local/man"
+MANPATH="/usr/X11R6/man:/usr/share/man:/usr/local/share/man:/usr/local/man"
 export BROWSER SEARCH_ENGINE LC_ALL ENV PATH HISTFILE HISTSIZE EDITOR MANPATH

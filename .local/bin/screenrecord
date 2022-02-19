@@ -1,10 +1,13 @@
 #!/bin/sh
+notify-send "Record will start in 3 seconds" -t 3000; sleep 3
+mkdir -p "$HOME/records"
+echo "Press q to stop recording"
 ffmpeg \
 	-f x11grab \
-	-framerate 60 \
+	-framerate 30 \
 	-s "$(xdpyinfo | awk '/dimensions/ {print $2;}')" \
 	-i "$DISPLAY" \
 	-f sndio -i default \
 	-r 30 \
 	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$HOME/screenrecord-$(date '+%y%m%d-%H%M-%S').mkv"
+	"$HOME/records/screenrecord-$(date '+%y%m%d-%H%M-%S').mkv" > /dev/null 2>&1

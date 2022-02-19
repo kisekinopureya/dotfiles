@@ -15,7 +15,7 @@ src="dl.suckless.org/$name/$name-$version.tar.gz"
 
 dmenu(){
 name="dmenu"
-version="5.0"
+version="5.1"
 src="dl.suckless.org/tools/$name-$version.tar.gz"
 }
 

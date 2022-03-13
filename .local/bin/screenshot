@@ -2,7 +2,7 @@
 
 [ -z "$delay" ] && delay=0
 x=$(print "Fullscreen\nArea\nSet Delay" | dmenu)
-cmd="sxiv \$f && mkdir -p ~/Pictures/Screenshots; mv \$f ~/Pictures/Screenshots"
+cmd="nsxiv \$f && mkdir -p ~/Pictures/Screenshots; mv \$f ~/Pictures/Screenshots"
 
 while :
 do

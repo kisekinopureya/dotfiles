@@ -24,7 +24,7 @@
 	- scrot (screen capture)
 	- search.disroot.org (search engine)
 	- sndio[^2] (audio backend)
-	- sxiv (image viewer)
+	- nsxiv (image viewer)
 	- vis (text editor)
 	- xautolock (lock screen on inactivity) 
 	- xcompmgr (compositor)

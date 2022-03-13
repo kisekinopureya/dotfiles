@@ -1,7 +1,7 @@
 #!/bin/sh
-if [ "$(xrandr | awk /VGA-1/'{print $2}')" = "disconnected" ]; then
+if [ -n "$NODUALMONITOR" ]; then
 	xrandr --auto
 else
-	xrandr --output LVDS-1 --mode 1366x768 --pos 1920x0 --rotate normal --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-fi
+	xrandr --output "$FIRSTMONITOR" --primary --mode "$FIRSTMONITORRES" --rate "$FIRSTMONITORRATE" --output "$SECONDMONITOR" --right-of "$FIRSTMONITOR" --mode "$SECONDMONITORRES" --rate "$SECONDMONITORRATE"
+	fi
 setwallpaper

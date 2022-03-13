@@ -10,7 +10,10 @@ x="$(printf "Search\nGoto URL\nBookmarks" | dmenu)"
 
 searchelper(){
 if [ "$SEARCHIST" = 1 ]; then
-	[ ! -f "$SEARCHISTFILE" ] && touch "$SEARCHISTFILE"
+	if [ ! -f "$SEARCHISTFILE" ]; then
+		 touch "$SEARCHISTFILE"
+		 chmod 600 "$SEARCHISTFILE"
+	fi
 	search="$(cat $SEARCHISTFILE | dmenu)"
 	echo "$search" >> "$SEARCHISTFILE"
 elif [ "$SEARCHIST" = 0 ]; then
@@ -22,7 +25,10 @@ fi
 
 urlhelper(){
 if [ "$URLHIST" = 1 ]; then
-	[ ! -f "$URLHISTFILE" ] && touch "$URLHISTFILE"
+	if [ ! -f "$URLHISTFILE" ]; then
+		touch "$URLHISTFILE"
+		chmod 600 "$URLHISTFILE"
+	fi
 	url="$(cat $URLHISTFILE | dmenu)"
 	echo "$url" >> "$URLHISTFILE"
 elif [ "$URLHIST" = 0 ]; then

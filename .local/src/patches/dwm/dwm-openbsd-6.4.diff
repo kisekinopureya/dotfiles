@@ -1,7 +1,8 @@
-Index: config.mk
---- config.mk.orig
-+++ config.mk
-@@ -16,9 +16,9 @@ XINERAMAFLAGS = -DXINERAMA
+diff --git a/config.mk b/config.mk
+index ef8acf7..85f5fc0 100644
+--- a/config.mk
++++ b/config.mk
+@@ -16,10 +16,10 @@ XINERAMAFLAGS = -DXINERAMA
  
  # freetype
  FREETYPELIBS = -lfontconfig -lXft
@@ -9,7 +10,9 @@ Index: config.mk
 +#FREETYPEINC = /usr/include/freetype2
  # OpenBSD (uncomment)
 -#FREETYPEINC = ${X11INC}/freetype2
+-#MANPREFIX = ${PREFIX}/man
 +FREETYPEINC = ${X11INC}/freetype2
++MANPREFIX = ${PREFIX}/man
  
  # includes and libs
  INCS = -I${X11INC} -I${FREETYPEINC}

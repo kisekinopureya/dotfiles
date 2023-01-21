@@ -9,13 +9,13 @@ fi
 
 dwm(){
 name="dwm"
-version="6.3"
+version="6.4"
 src="dl.suckless.org/$name/$name-$version.tar.gz"
 }
 
 dmenu(){
 name="dmenu"
-version="5.1"
+version="5.2"
 src="dl.suckless.org/tools/$name-$version.tar.gz"
 }
 
@@ -28,13 +28,13 @@ config=blocks
 
 st(){
 name="st"
-version="0.8.5"
+version="0.9"
 src="dl.suckless.org/$name/$name-$version.tar.gz"
 }
 
 slock(){
 name="slock"
-version="1.4"
+version="1.5"
 src="dl.suckless.org/tools/$name-$version.tar.gz"
 }
 

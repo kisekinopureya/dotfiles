@@ -12,12 +12,11 @@ getmute()
 
 [ "$(getmute input)" = 1 ] && miclevel="[M] " || miclevel="%$(getlevel input) "
 
-if [ "$(uname)" = "OpenBSD" ] && [ "$(sysctl -n kern.audio.record)" = 0 ]; then
-       miclevel=""
-fi
+[ "$(sysctl -n kern.audio.record)" = 0 ] && miclevel=""
+
 
 [ "$(getmute output)" = 1 ] && outputlevel="[M]" || outputlevel="%$(getlevel output)"
 
-[ "$(uname)" = "OpenBSD" ] && [ "$(sysctl -n kern.video.record)" = 1 ] && cam="[C] "
+[ "$(sysctl -n kern.video.record)" = 1 ] && cam="[C] "
 
 echo "$cam$miclevel$outputlevel"

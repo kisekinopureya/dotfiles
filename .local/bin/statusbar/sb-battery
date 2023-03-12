@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# no sb-battery for linux :(
-[ "$(uname)" != "OpenBSD" ] && exit
 charger="$(apm -a)"
 batteryp="$(apm -l)"
 batterys="$(apm -b)"

@@ -1,17 +1,20 @@
 #!/bin/sh
-if [ "$(uname)" != "OpenBSD" ]; then
-	error="Toggles are only available on OpenBSD"
-	notify-send "$error" || echo "$error"
-	exit
-fi
 choice=$(printf "Camera\nMicrophone" | dmenu)
 
 toggle() {
-	if [ "$(sysctl -n kern."$1".record)" = 1 ]; then
-		doashelper sysctl kern."$1".record=0
-	elif [ "$(sysctl -n kern."$1".record)" = 0 ]; then
-		doashelper sysctl kern."$1".record=1
-	fi
+	case "$(sysctl -n kern."$1".record)" in
+		1)
+			doashelper sysctl kern."$1".record=0
+			break
+			;;
+		0)
+			doashelper sysctl kern."$1".record=1
+			break
+			;;
+		*)
+			break
+			;;
+	esac
 }
 
 while :

@@ -5,11 +5,8 @@ while :
 do
 	case $x in
 		"Power Off")
-			if [ "$(uname)" = "OpenBSD" ]; then
-				doashelper shutdown -p now
-                        else
+			doashelper shutdown -p now
 				doashelper poweroff
-                        fi
 			break
 			;;
 		"Reboot")
@@ -27,5 +24,5 @@ do
 		*)
 			break
 			;;
-		esac
+	esac
 done

@@ -65,9 +65,6 @@ static const Layout layouts[] = {
 /* OpenBSD only allows SIGUSR1 and 2 */
 #define KILLSB "pkill -SIGUSR1 dwmblocks"
 
-/* For pledge. See dwm.c 2146th line */
-#define __OpenBSD__ 1
-
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bartext, "-nf", col_barbg, "-sb", col_active, "-sf", col_barbg, NULL };
